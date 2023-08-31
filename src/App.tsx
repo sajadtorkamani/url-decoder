@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { buildSearchParams } from './lib/utils'
 
 const App: React.FC = () => {
-  const [url, setUrl] = useState('https://example.com?name=Sajad&age=30')
+  const [url, setUrl] = useState('')
   const searchParams = buildSearchParams(url)
 
   return (
