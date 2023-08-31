@@ -1,34 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react'
+import { buildSearchParams} from './lib/utils'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [url, setUrl] = useState('https://example.com?name=Sajad&age=30')
+  const searchParams = buildSearchParams(url)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main className="p-4">
+      <h1 className="text-[20px] font-bold mb-4">Decode URL params</h1>
+
+      <input
+        type="text"
+        placeholder="Enter URL"
+        className="border px-2 py-1 w-full max-w-lg mb-5"
+        autoFocus
+        value={url}
+        onChange={(event) => {
+          setUrl(event.target.value)
+        }}
+      />
+
+      {searchParams && searchParams.length > 0 ? (
+        <table>
+          <thead>
+          <tr>
+
+          <th>Param</th>
+          <th>Value</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          {searchParams.map(([param, value]) => {
+            return (
+              <tr key={param}>
+                <td>{param}</td>
+                <td>{value}</td>
+              </tr>
+            )
+          })}
+          </tbody>
+        </table>
+      ) : (
+        <p className={url ? 'block' : 'hidden'}>No search params in URL.</p>
+      )}
+    </main>
   )
 }
 
