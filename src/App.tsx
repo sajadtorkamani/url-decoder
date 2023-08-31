@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { buildSearchParams} from './lib/utils'
+import { buildSearchParams } from './lib/utils'
 
 const App: React.FC = () => {
   const [url, setUrl] = useState('https://example.com?name=Sajad&age=30')
@@ -21,26 +21,28 @@ const App: React.FC = () => {
       />
 
       {searchParams && searchParams.length > 0 ? (
-        <table>
-          <thead>
-          <tr>
+        <div className="overflow-x-scroll max-w-5xl">
+          <table>
+            <thead>
+            <tr>
 
-          <th>Param</th>
-          <th>Value</th>
-          </tr>
-          </thead>
+              <th>Param</th>
+              <th>Value</th>
+            </tr>
+            </thead>
 
-          <tbody>
-          {searchParams.map(([param, value]) => {
-            return (
-              <tr key={param}>
-                <td>{param}</td>
-                <td>{value}</td>
-              </tr>
-            )
-          })}
-          </tbody>
-        </table>
+            <tbody>
+            {searchParams.map(([param, value]) => {
+              return (
+                <tr key={param}>
+                  <td>{param}</td>
+                  <td>{value}</td>
+                </tr>
+              )
+            })}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p className={url ? 'block' : 'hidden'}>No search params in URL.</p>
       )}
